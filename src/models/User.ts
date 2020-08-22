@@ -4,7 +4,9 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from "typeorm";
+import Rating from "./Rating";
 
 @Entity("users")
 export default class User {
@@ -18,6 +20,9 @@ export default class User {
     unique: true,
   })
   email: string;
+
+  @OneToMany((type) => Rating, (rating) => rating.user)
+  ratings: Rating[];
 
   @CreateDateColumn({ name: "created_at" })
   createdAt: Date;

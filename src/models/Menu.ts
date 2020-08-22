@@ -4,7 +4,9 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from "typeorm";
+import Rating from "./Rating";
 
 @Entity("menus")
 export default class Menu {
@@ -25,6 +27,9 @@ export default class Menu {
 
   @Column()
   dessert: string;
+
+  @OneToMany((type) => Rating, (rating) => rating.menu)
+  ratings: Rating[];
 
   @CreateDateColumn({ name: "created_at" })
   createdAt: Date;
